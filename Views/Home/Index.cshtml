@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-10" style="color: brown;"><span style="color: red">L</span>ibary <span style="color:red">M</span>anagement <span style="color: red;">S</span>ystem</h1>
+</div>
+
+
+<h2>Books</h2>
+
+<form asp-action="Index">
+    <div class="form-row">
+        <div class="col-md-3">
+            <input class="form-control" placeholder="Search Book" type="text" name="searchTerm" value="@ViewData["currentFilter"]" />
+        </div>
+        <div class="col-md-9">
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </div>
+        <div class="col-md-12">
+            Find by:
+            <input type="radio" name="searchBy" value="title" checked /> Title
+            <input type="radio" name="searchBy" value="isbn" /> ISBN
+        </div>
+    </div>
+</form>
+<div>
+    <img src="/images/lib1.jpg" style="width: 100%;">
+</div>  
+
+<hr />
