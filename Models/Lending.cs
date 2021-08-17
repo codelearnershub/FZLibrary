@@ -1,7 +1,7 @@
 using System;
 namespace LibaryManagementSystem2.Models
 {
-    public class Issue : BaseEntity
+    public class Lending : BaseEntity
     {
          
         public DateTime IssueDate { get; set; }
@@ -17,5 +17,6 @@ namespace LibaryManagementSystem2.Models
         public Book Book { get; set; }
         
         public bool IsReturned {get; set;}
+        public double FineAmount {get; set;}
     }
 }
