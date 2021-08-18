@@ -18,7 +18,7 @@ namespace LibaryManagementSystem2.Models
         }
         public DbSet<Book> Books { get; set; }
         public DbSet<User> Users { get; set; }
-     
+         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Category> Categories {get; set; }
         public DbSet<Role> Roles {get; set; }
         public DbSet<Rack> Racks {get; set; }
