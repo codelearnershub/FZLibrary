@@ -1,15 +1,19 @@
+  
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using LibaryManagementSystem2.Models;
+using LibaryManagementSystem2.Interfaces;
+using LibaryManagementSystem2.Repositories;
+// using LibaryManagementSystem2.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using LibaryManagementSystem2.Models;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
 
 // using AutoMapper;
 
@@ -28,8 +32,23 @@ namespace LibaryManagementSystem2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            // services.AddDbContext<LibaryManagementDBContext>(options =>
-            // options.UseMySQL(Configuration.GetConnectionString("LibaryManagementDBContext")));
+            services.AddDbContext<LibaryManagementDBContext>(options =>
+            options.UseMySQL(Configuration.GetConnectionString("LibaryManagementConnectionString")));
+            
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            // services.AddScoped<IUserService, UserService>();
+
+            services.AddScoped<IUserRoleRepository, UserRoleRepository>();
+
+            // services.AddScoped<IUserRoleService, UserRoleService>();
+
+            services.AddScoped<IRoleRepository, RoleRepository>();
+
+            // services.AddScoped<IRoleService, RoleService>();
+            //  services.AddScoped<IBookRepository, BookRepository>();
+            //   services.AddScoped<IBookService, BookService>();
+
             //  services.AddAutoMapper(typeof(Startup));
         }
 
