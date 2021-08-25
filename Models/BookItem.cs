@@ -10,6 +10,7 @@ namespace LibaryManagementSystem2.Models
         public int BookId {get; set;}
         
         public double FineAmount {get; set;}
+        public int ItemsRemaining {get; set;}
 
        
     }

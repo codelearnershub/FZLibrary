@@ -10,16 +10,33 @@ namespace LibaryManagementSystem2.Models.ViewModels
     }
     public class AddBookItemViewModel
     {
+        public int Id {get; set;}
         [Required(ErrorMessage = "Input Number of Books!")]
         public int NumberOfItem { get; set; }
 
 
         [Required(ErrorMessage = "Select Book!")]
         public IEnumerable<SelectListItem> Book { get; set; }
-
-
-        [Required(ErrorMessage = "Select Book!")]
+        public string Barcode {get; set;}
         public int BookId { get; set; }
+        public double FineAmount {get; set;}
+       
+     
+
+    }
+    public class ListBookItemViewModel
+    {
+        public int Id { get; set; }
+        public string Barcode {get; set;}
+        public int NumberOfItem {get; set;}
+
+        public int BookId {get; set;}
+        public int ItemsRemaining{get; set;}
+        
+        public double FineAmount {get; set;}
+    }
+    public class UpdateBookItemViewModel : AddBookItemViewModel
+    {
 
     }
 
