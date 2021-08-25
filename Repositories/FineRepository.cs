@@ -1,9 +1,10 @@
 using System.Linq;
+using LibaryManagementSystem2.Interfaces;
 using LibaryManagementSystem2.Models;
 
 namespace LibaryManagementSystem2.Repositories
 {
-    public class FineRepository
+    public class FineRepository : IFineRepository
     {
           private readonly LibaryManagementDBContext _dbContext;
 

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using LibaryManagementSystem2.Models;
 
-namespace LibaryManagementSystem.Interfaces
+namespace LibaryManagementSystem2.Interfaces
 {
     public interface IBookService
     {

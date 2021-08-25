@@ -3,9 +3,9 @@ using System;
 using LibaryManagementSystem2.Interfaces;
 using LibaryManagementSystem2.Models;
 using System.Collections.Generic;
-using LibaryManagementSystem.Interfaces;
 
-namespace LibaryManagementSystem.Repositories
+
+namespace LibaryManagementSystem2.Repositories
 {
     public class BookRepository : IBookRepository
     {

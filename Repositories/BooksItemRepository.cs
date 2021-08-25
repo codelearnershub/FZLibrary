@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LibaryManagementSystem2.Repositories
 {
-    public class BooksItemRepository
+    public class BooksItemRepository: IBookItemRepository
     {
          private readonly LibaryManagementDBContext _dbContext;
 
@@ -38,6 +38,10 @@ namespace LibaryManagementSystem2.Repositories
         public BookItem FindById(int bookItemId)
         {
             return _dbContext.BookItems.FirstOrDefault(u => u.Id.Equals(bookItemId));
+        }
+         public List<BookItem> GetAll()
+        {
+            return _dbContext.BookItems.ToList();
         }
 
         public BookItem Update(BookItem bookItem)

@@ -12,10 +12,6 @@ namespace LibaryManagementSystem2.Models
             : base(options)
         {
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-
-        }
         public DbSet<Book> Books { get; set; }
         public DbSet<User> Users { get; set; }
          public DbSet<UserRole> UserRoles { get; set; }
@@ -25,6 +21,100 @@ namespace LibaryManagementSystem2.Models
         public DbSet<BookItem> BookItems {get; set; }
         public DbSet<Fine> Fines {get; set; }
         public DbSet<Lending> Lendings {get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().Property(u => u.PasswordHash).IsRequired();
+
+            modelBuilder.Entity<User>().Property(u => u.HashSalt).IsRequired();
+
+            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
+
+
+            modelBuilder.Entity<User>().Property(u => u.Email)
+                .IsRequired()
+                .HasMaxLength(40);
+            modelBuilder.Entity<User>().Property(u => u.FirstName).IsRequired();
+
+            modelBuilder.Entity<User>().Property(u => u.LastName).IsRequired();
+
+            modelBuilder.Entity<User>().Property(u => u.PhoneNumber).IsRequired();
+
+            modelBuilder.Entity<User>().Property(u => u.Address).IsRequired();
+
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    Id = 1,
+                    FirstName = "Fariid",
+                    LastName = "Ayanfe",
+                    Address ="ZAmfara",
+                    PhoneNumber = "07058464499",
+                    Email = "fariidzikrullah@gmail.com",
+                    CreatedAt = DateTime.Now,
+                    PasswordHash = "EGSROdXOgd5YsDofKkZatVGf2Cnc/7O/RxhqQSmOF30=",
+                    HashSalt = "J5cdgq6p63lKwmVg3b7ltQ==",
+                }
+                );
+                  modelBuilder.Entity<Role>().Property(u => u.RoleName).IsRequired();
+
+            modelBuilder.Entity<Role>().HasData(
+                new Role
+                {
+                    Id = 1,
+                    RoleName = "SuperAdmin",
+                    CreatedAt = DateTime.Now,
+                }
+                );
+            //      modelBuilder.Entity<Book>().Property(u => u.Item).IsRequired();
+
+
+            // modelBuilder.Entity<Expenses>().Property(u => u.Description).IsRequired();
+
+
+            // modelBuilder.Entity<Message>().Property(u => u.Title).IsRequired();
+
+            // modelBuilder.Entity<Message>().Property(u => u.Content).IsRequired();
+
+           
+            // modelBuilder.Entity<FlockType>().Property(u => u.Name).IsRequired();
+
+            // modelBuilder.Entity<FlockType>().Property(u => u.Description).IsRequired();
+
+
+            // modelBuilder.Entity<Flock>().Property(u => u.BatchNo).IsRequired();
+
+            // modelBuilder.Entity<Flock>().HasIndex(u => u.BatchNo).IsUnique();
+
+
+
+
+            // modelBuilder.Entity<Sales>().Property(u => u.Item).IsRequired();
+
+
+            // modelBuilder.Entity<SalesItem>().Property(u => u.Item).IsRequired();
+
+
+
+            // modelBuilder.Entity<BookItem>().Property(u => u.Name).IsRequired();
+
+            // modelBuilder.Entity<StoreItem>().Property(u => u.ItemType).IsRequired();
+
+            // modelBuilder.Entity<UserRole>().HasIndex(u => new { u.UserId, u.RoleId }).IsUnique();
+
+            modelBuilder.Entity<UserRole>().HasData(
+                new UserRole
+                {
+                    Id = 1,
+                    UserId = 1,
+                    RoleId = 1,
+                    CreatedAt = DateTime.Now,
+                   
+                }
+                );
+
+
+        }
+       
 
     }
 }

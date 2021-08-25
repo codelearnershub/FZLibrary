@@ -5,7 +5,6 @@ using LibaryManagementSystem2.Models;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using LibaryManagementSystem.Interfaces;
 using LibaryManagementSystem2.Interfaces;
 using LibaryManagementSystem2.Models.ViewModels;
 

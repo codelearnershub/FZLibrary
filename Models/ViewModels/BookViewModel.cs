@@ -23,7 +23,7 @@ namespace LibaryManagementSystem2.Models.ViewModels
           
         public int MaxIssueDays {get; set;}
           [Required(ErrorMessage = "Choose Category!")]
-        public IEnumerable<sssssss> CategoryList { get; set; }
+        public IEnumerable<SelectListItem> CategoryList { get; set; }
         public int NumberOfItem {get; set;}
         public int CategoryId {get; set;}
         public int BookItemId {get; set;}
