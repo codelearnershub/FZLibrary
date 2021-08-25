@@ -16,10 +16,7 @@ namespace LibaryManagementSystem2.Models
 
         public string HashSalt { get; set; }
          public string PhoneNumber { get; set; }
-<<<<<<< HEAD
          public int RoleId {get; set;}
-=======
->>>>>>> 6744f7bed5e017ac46c097fb660b47edb0618dea
 
         public string Address { get; set; }
     }

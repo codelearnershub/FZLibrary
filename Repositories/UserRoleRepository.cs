@@ -4,10 +4,7 @@ using LibaryManagementSystem2.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-<<<<<<< HEAD
 using Microsoft.EntityFrameworkCore;
-=======
->>>>>>> 6744f7bed5e017ac46c097fb660b47edb0618dea
 
 namespace LibaryManagementSystem2.Repositories
 {
@@ -43,7 +40,6 @@ namespace LibaryManagementSystem2.Repositories
             return _dbContext.UserRoles.FirstOrDefault(u => u.Id.Equals(userRoleId));
         }
 
-<<<<<<< HEAD
       
         public string FindRole(int userId)
         {
@@ -58,8 +54,6 @@ namespace LibaryManagementSystem2.Repositories
         }
 
 
-=======
->>>>>>> 6744f7bed5e017ac46c097fb660b47edb0618dea
         public UserRole Update(UserRole userRole)
         {
             _dbContext.UserRoles.Update(userRole);

@@ -33,7 +33,6 @@ namespace LibaryManagementSystem2.Repositories
                 _dbContext.SaveChanges();
             }
         }
-<<<<<<< HEAD
           public List<Role> GetAllRoles()
         {
             return _dbContext.Roles.ToList();
@@ -42,8 +41,6 @@ namespace LibaryManagementSystem2.Repositories
         {
             return _dbContext.Roles.FirstOrDefault(u => u.RoleName.Equals(roleName));
         }
-=======
->>>>>>> 6744f7bed5e017ac46c097fb660b47edb0618dea
 
         public Role FindById(int roleId)
         {

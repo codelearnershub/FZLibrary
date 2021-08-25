@@ -96,86 +96,46 @@ namespace LibaryManagementSystem2.Controllers
                     CategoryId = book.CategoryId,
                     MaxIssueDays = book.MaxIssueDays,
                     BookItemId = book.BookItemId,
-                    FlockList = _flockService.GetAllFlocks().Select(m => new SelectListItem
+                    CategoryList = _categoryService.GetAll().Select(m => new SelectListItem
                     {
-                        Text = $"{_flockTypeService.FindById(m.FlockTypeId).Name} Batch No: {m.BatchNo}",
+                        Text = $"{_categoryService.FindById(m.Id).Name} ",
                         Value = m.Id.ToString(),
-                    }),
+                    })
                 };
 
-                return View(updateStock);
+                return View(updateBook);
             }
-           [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(Book book)
+        }
+
+        [HttpPost]
+        public IActionResult UpdateBook(UpdateBookViewModel updateBook)
         {
-            if (ModelState.IsValid)
+            Book book = new Book
             {
-                if(book != null)
-                {
-                    
-                _bookService.AddBook(book);
-                return RedirectToAction(nameof(Index));
-                }
-            }
-            return View(book);
+                BookId = updateBook.Id,
+                Name = updateBook.Name,
+                NumberOfItem = updateBook.NumberOfItem,
+                CategoryId = updateBook.CategoryId,
+                RackNumber = updateBook.RackNumber,
+                MaxIssueDays = updateBook.MaxIssueDays,
+                BookItemId = updateBook.BookItemId,
+            };
+            _bookService.UpdateBook(book);
+            return RedirectToAction("Index");
         }
         
-        [HttpGet]
-        public IActionResult Edit(int? id)
+        public IActionResult Delete(int id)
         {
-            if (id == null)
+            var book = _bookService.GetBook(id);
+            if (book == null)
             {
                 return NotFound();
             }
-
-            var item = _bookService.GetBook(id.Value);
-            if (item == null)
-            {
-                return NotFound();
-            }
-            return View(item);
-        }
-           [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Book book)
-        {
-            if (id != book.BookId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                _bookService.UpdateBook(book);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(book);
-        }
-          public IActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var item = _bookService.GetBook(id.Value);
-            if (item == null)
-            {
-                return NotFound();
-            }
-
-            return View(item);
-        }
-           [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
-        {
             _bookService.DeleteBook(id);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
 
-
+         
     }
 }
 

@@ -14,14 +14,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-<<<<<<< HEAD
 using Microsoft.AspNetCore.Authentication.Cookies;
 using LibaryManagementSystem2.Services;
 using LibaryManagementSystem.Interfaces;
 using LibaryManagementSystem.Repositories;
 using LibaryManagementSystem.Services;
-=======
->>>>>>> 6744f7bed5e017ac46c097fb660b47edb0618dea
 
 // using AutoMapper;
 
@@ -42,7 +39,6 @@ namespace LibaryManagementSystem2
             services.AddControllersWithViews();
             services.AddDbContext<LibaryManagementDBContext>(options =>
             options.UseMySQL(Configuration.GetConnectionString("LibaryManagementConnectionString")));
-<<<<<<< HEAD
               services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(config =>
             {
                 config.LoginPath = "/Libary/Login";
@@ -64,24 +60,6 @@ namespace LibaryManagementSystem2
 
 
             //   services.AddAutoMapper(typeof(Startup));
-=======
-            
-            services.AddScoped<IUserRepository, UserRepository>();
-
-            // services.AddScoped<IUserService, UserService>();
-
-            services.AddScoped<IUserRoleRepository, UserRoleRepository>();
-
-            // services.AddScoped<IUserRoleService, UserRoleService>();
-
-            services.AddScoped<IRoleRepository, RoleRepository>();
-
-            // services.AddScoped<IRoleService, RoleService>();
-            //  services.AddScoped<IBookRepository, BookRepository>();
-            //   services.AddScoped<IBookService, BookService>();
-
-            //  services.AddAutoMapper(typeof(Startup));
->>>>>>> 6744f7bed5e017ac46c097fb660b47edb0618dea
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
