@@ -1,5 +1,8 @@
 using System;
+<<<<<<< HEAD
 using System.Collections.Generic;
+=======
+>>>>>>> 6744f7bed5e017ac46c097fb660b47edb0618dea
 using System.Security.Cryptography;
 using LibaryManagementSystem2.Interfaces;
 using LibaryManagementSystem2.Models;
@@ -10,6 +13,7 @@ namespace LibaryManagementSystem2.Services
     public class UserService
     {
         private readonly IUserRepository _userRepository;
+<<<<<<< HEAD
         private readonly IUserRoleRepository _userRoleRepository;
 
         public UserService(IUserRepository userRepository, IUserRoleRepository userRoleRepository)
@@ -20,6 +24,18 @@ namespace LibaryManagementSystem2.Services
 
 
         public void RegisterUser(User user)
+=======
+        private readonly IUserRoleService _userRoleService;
+
+        public UserService(IUserRepository userRepository, IUserRoleService userRoleService)
+        {
+            _userRepository = userRepository;
+            _userRoleService = userRoleService;
+        }
+
+
+        public void RegisterUser(int userId, string password, string lastName, string firstName, string email, string phoneNumber, string address, int roleId)
+>>>>>>> 6744f7bed5e017ac46c097fb660b47edb0618dea
         {
             byte[] salt = new byte[128 / 8];
 
@@ -30,6 +46,7 @@ namespace LibaryManagementSystem2.Services
 
             string saltString = Convert.ToBase64String(salt);
 
+<<<<<<< HEAD
             string hashedPassword = HashPassword(user.Password, saltString);
 
             User users = new User
@@ -54,6 +71,26 @@ namespace LibaryManagementSystem2.Services
                 RoleId = user.RoleId,
             };
             _userRoleRepository.Add(userRole);
+=======
+            string hashedPassword = HashPassword(password, saltString);
+
+            User user = new User
+            {
+                CreatedBy = _userRepository.FindById(userId).Email,
+                CreatedAt = DateTime.Now,
+                LastName = lastName,
+                FirstName = firstName,
+                Email = email,
+                PhoneNumber = phoneNumber,
+                Address = address,
+                HashSalt = saltString,
+                PasswordHash = hashedPassword,
+            };
+
+            _userRepository.Add(user);
+
+            _userRoleService.Add(user.Id, roleId);
+>>>>>>> 6744f7bed5e017ac46c097fb660b47edb0618dea
         }
 
         private string HashPassword(string password, string salt)
@@ -90,10 +127,13 @@ namespace LibaryManagementSystem2.Services
 
             return null;
         }
+<<<<<<< HEAD
           public IEnumerable<User> GetAllUser()
         {
             return _userRepository.GetAllUser();
         }
+=======
+>>>>>>> 6744f7bed5e017ac46c097fb660b47edb0618dea
 
         public User FindById(int Id)
         {
@@ -127,7 +167,11 @@ namespace LibaryManagementSystem2.Services
             user.Address = address;
             user.HashSalt = saltString;
             user.PasswordHash = hashedPassword;
+<<<<<<< HEAD
           
+=======
+            user.UpdatedAt = DateTime.Now;
+>>>>>>> 6744f7bed5e017ac46c097fb660b47edb0618dea
 
             return _userRepository.Update(user);
         }
