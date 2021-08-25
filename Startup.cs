@@ -1,15 +1,24 @@
+  
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using LibaryManagementSystem2.Models;
+using LibaryManagementSystem2.Interfaces;
+using LibaryManagementSystem2.Repositories;
+// using LibaryManagementSystem2.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using LibaryManagementSystem2.Models;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using LibaryManagementSystem2.Services;
+using LibaryManagementSystem.Interfaces;
+using LibaryManagementSystem.Repositories;
+using LibaryManagementSystem.Services;
 
 // using AutoMapper;
 
@@ -28,9 +37,29 @@ namespace LibaryManagementSystem2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            // services.AddDbContext<LibaryManagementDBContext>(options =>
-            // options.UseMySQL(Configuration.GetConnectionString("LibaryManagementDBContext")));
-            //  services.AddAutoMapper(typeof(Startup));
+            services.AddDbContext<LibaryManagementDBContext>(options =>
+            options.UseMySQL(Configuration.GetConnectionString("LibaryManagementConnectionString")));
+              services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(config =>
+            {
+                config.LoginPath = "/Libary/Login";
+                config.LogoutPath = "/Libary/Logout";
+                config.Cookie.Name = "LibaryAuth";
+            });
+            
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserRoleRepository, UserRoleRepository>();
+            services.AddScoped<IUserRoleService, UserRoleService>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IRackService, RackService>();
+            services.AddScoped<ILendingService, LendingService>();
+            services.AddScoped<IBookService, BookService>();
+          
+
+
+            //   services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +79,8 @@ namespace LibaryManagementSystem2
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
+        
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

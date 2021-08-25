@@ -1,12 +1,16 @@
 using System;
 namespace LibaryManagementSystem2.Models
 {
-    public class BookItem
+    public class BookItem : BaseEntity
     {
-        public Guid Barcode {get; set;}
+
+        public string Barcode {get; set;}
+        public int NumberOfItem {get; set;}
 
         public int BookId {get; set;}
         
         public double FineAmount {get; set;}
+
+       
     }
 }

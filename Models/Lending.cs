@@ -17,6 +17,6 @@ namespace LibaryManagementSystem2.Models
         public Book Book { get; set; }
         
         public bool IsReturned {get; set;}
-        public double FineAmount {get; set;}
+        public decimal? FineAmount {get; set;}
     }
 }

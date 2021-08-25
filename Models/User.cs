@@ -1,9 +1,9 @@
 using System;
 namespace LibaryManagementSystem2.Models
 {
-    public class User 
+    public class User : BaseEntity
     {
-        public int UserId {get; set;}
+        
        
        public string FirstName{get; set;}
 
@@ -12,5 +12,12 @@ namespace LibaryManagementSystem2.Models
         public string Email{get; set;}
 
         public string Password{get; set;}
+        public string PasswordHash { get; set; }
+
+        public string HashSalt { get; set; }
+         public string PhoneNumber { get; set; }
+         public int RoleId {get; set;}
+
+        public string Address { get; set; }
     }
 }

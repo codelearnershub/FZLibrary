@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using LibaryManagementSystem2.Models;
 
-namespace LibaryManagementSystem2.Controllers
+namespace LibaryManagementSystem.Controllers
 {
     public class HomeController : Controller
     {
