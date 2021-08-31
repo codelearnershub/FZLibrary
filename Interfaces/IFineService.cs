@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using LibaryManagementSystem2.Models;
 
 namespace LibaryManagementSystem2.Interfaces
@@ -8,8 +9,11 @@ namespace LibaryManagementSystem2.Interfaces
 
         public Fine FindById(int id);
 
-        public Fine Update(int salesId, Fine fine);
+        public Fine Update(Fine fine);
 
         public void Delete(int id);
+        public List<Fine> GetAll();
+
+
     }
 }

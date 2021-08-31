@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using LibaryManagementSystem2.Interfaces;
 using LibaryManagementSystem2.Models;
 
@@ -34,9 +35,9 @@ namespace LibaryManagementSystem2.Services
             return _fineRepository.FindById(id);
         }
 
-        public Fine Update(int fineId, Fine fine)
+        public Fine Update(Fine fine)
         {
-            var fines = _fineRepository.FindById(fineId);
+            var fines = _fineRepository.FindById(fine.Id);
             if (fines == null)
             {
                 return null;
@@ -53,6 +54,11 @@ namespace LibaryManagementSystem2.Services
         public void Delete(int id)
         {
             _fineRepository.Delete(id);
+        }
+
+        public List<Fine> GetAll()
+        {
+            return _fineRepository.GetAll();
         }
     }
 }

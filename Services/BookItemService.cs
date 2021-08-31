@@ -1,10 +1,11 @@
 using System;
+using System.Collections.Generic;
 using LibaryManagementSystem2.Interfaces;
 using LibaryManagementSystem2.Models;
 
 namespace LibaryManagementSystem2.Services
 {
-    public class BookItemService
+    public class BookItemService : IBookItemService
     {
           private readonly IBookItemRepository _bookItemRepository;
         private readonly IUserService _userService;
@@ -22,7 +23,7 @@ namespace LibaryManagementSystem2.Services
               
                 CreatedAt = DateTime.Now,
                 BookId = bookItem.BookId,
-                Barcode = (Guid.NewGuid()).ToString("0000000000"),
+                Barcode = bookItem.Barcode,
                 NumberOfItem = bookItem.NumberOfItem,
                 
             };
@@ -35,9 +36,9 @@ namespace LibaryManagementSystem2.Services
             return _bookItemRepository.FindById(id);
         }
 
-        public BookItem Update(int bookItemId, BookItem bookItem)
+        public BookItem Update(BookItem bookItem)
         {
-            var booksItem = _bookItemRepository.FindById(bookItemId);
+            var booksItem = _bookItemRepository.FindById(bookItem.Id);
             if (booksItem == null)
             {
                 return null;
@@ -51,11 +52,21 @@ namespace LibaryManagementSystem2.Services
             booksItem.CreatedAt = DateTime.Now;
 
             return _bookItemRepository.Update(bookItem);
-        }
+         }
+        //  public List<BookItem> GetAll()
+        // {
+        //     return _bookItemRepository.GetAll();
+        // }
+
 
         public void Delete(int id)
         {
             _bookItemRepository.Delete(id);
+        }
+
+        public List<BookItem> GetAll()
+        {
+            throw new NotImplementedException();
         }
     }
 }

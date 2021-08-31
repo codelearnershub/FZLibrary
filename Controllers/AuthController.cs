@@ -94,13 +94,13 @@ namespace LibaryManagementsyste.Controllers
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, props);
             }
-            else if (role == "Store Manager")
+            else if (role == "Manager")
             {
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Role, "Store Manager")
+                    new Claim(ClaimTypes.Role, " Manager")
 
 
                 };
@@ -121,7 +121,7 @@ namespace LibaryManagementsyste.Controllers
             }
             else if (role == "Librarian")
             {
-                return RedirectToAction("Index", "Flock");
+                return RedirectToAction("Index", "Book");
             }
             else {
                 return NotFound();

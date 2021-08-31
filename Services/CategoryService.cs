@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using LibaryManagementSystem.Interfaces;
 using LibaryManagementSystem2.Models;
 
-namespace LibaryManagementSystem.Services
+namespace LibaryManagementSystem2.Services
 {
     public class CategoryService : ICategoryService
     {

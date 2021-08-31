@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace LibaryManagementSystem2.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
         private readonly IUserRoleRepository _userRoleRepository;
@@ -70,17 +70,17 @@ namespace LibaryManagementSystem2.Services
             return hashed;
         }
 
-        public User LoginUser(string email, string password)
+        public User LoginUser(User user)
         {
-            User user = _userRepository.FindByEmail(email);
+            User users = _userRepository.FindByEmail(user.Email);
 
-            if (user == null)
+            if (users == null)
             {
 
                 return null;
             }
 
-            string hashedPassword = HashPassword(password, user.HashSalt);
+            string hashedPassword = HashPassword(user.Password, user.HashSalt);
 
             if (user.PasswordHash.Equals(hashedPassword))
             {
@@ -100,11 +100,11 @@ namespace LibaryManagementSystem2.Services
             return _userRepository.FindById(Id);
         }
 
-        public User Update(int id, string password, string lastName, string firstName, string email, string phoneNumber, string address)
+     public User Update(User user)
         {
-            User user = _userRepository.FindById(id);
+            User users = _userRepository.FindById(user.Id);
 
-            if (user == null)
+            if (users == null)
             {
                 return null;
             }
@@ -118,16 +118,16 @@ namespace LibaryManagementSystem2.Services
 
             string saltString = Convert.ToBase64String(salt);
 
-            string hashedPassword = HashPassword(password, saltString);
+            string hashedPassword = HashPassword(user.Password, saltString);
 
-            user.LastName = lastName;
-            user.FirstName = firstName;
-            user.Email = email;
-            user.PhoneNumber = phoneNumber;
-            user.Address = address;
+            user.LastName = user.LastName;
+            user.FirstName = user.FirstName;
+            user.Email = user.Email;
+            user.PhoneNumber = user.PhoneNumber;
+            user.Address = user.Address;
             user.HashSalt = saltString;
             user.PasswordHash = hashedPassword;
-          
+            user.UpdatedAt = DateTime.Now;
 
             return _userRepository.Update(user);
         }
@@ -137,5 +137,9 @@ namespace LibaryManagementSystem2.Services
             _userRepository.Delete(id);
         }
 
+        public void RegisterUser(string email, User user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

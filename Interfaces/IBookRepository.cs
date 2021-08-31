@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using LibaryManagementSystem2.Models;
 
-namespace LibaryManagementSystem.Interfaces
+namespace LibaryManagementSystem2.Interfaces
 {
     public interface IBookRepository
     {
-        public List<Book> GetAll();
+      public List<Book> GetAll();  
 
         public Book GetBook(int id);
 

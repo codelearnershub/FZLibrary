@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using LibaryManagementSystem2.Interfaces;
 using LibaryManagementSystem2.Models;
 
@@ -34,9 +35,9 @@ namespace LibaryManagementSystem2.Services
             return _rackRepository.FindById(id);
         }
 
-        public Rack Update(int rackId, Rack rack)
+        public Rack Update(Rack rack)
         {
-            var racks = _rackRepository.FindById(rackId);
+            var racks = _rackRepository.FindById(rack.Id);
             if (racks == null)
             {
                 return null;
@@ -54,6 +55,11 @@ namespace LibaryManagementSystem2.Services
         public void Delete(int id)
         {
             _rackRepository.Delete(id);
+        }
+
+        public List<Rack> GetAll()
+        {
+            return _rackRepository.GetAll();
         }
     }
 }
