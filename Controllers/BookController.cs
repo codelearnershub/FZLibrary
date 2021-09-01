@@ -41,6 +41,7 @@ namespace LibaryManagementSystem2.Controllers
                     Name = book.Name,
                     NumberOfItem = book.NumberOfItem,
                     RackNumber = book.RackNumber,
+                    Category = book.Category,
                     CategoryId = book.CategoryId,
                     MaxIssueDays = book.MaxIssueDays,
                 };
@@ -67,6 +68,11 @@ namespace LibaryManagementSystem2.Controllers
                 NumberOfItem = addBook.NumberOfItem,
                 CategoryId = addBook.CategoryId,
                 MaxIssueDays = addBook.MaxIssueDays,
+                 CategoryList = _categoryService.GetAll().Select(m => new SelectListItem
+                    {
+                        Text = $"{_categoryService.FindById(m.Id).Name} ",
+                        Value = m.Id.ToString(),
+                    })
 
             };
 
@@ -99,7 +105,7 @@ namespace LibaryManagementSystem2.Controllers
                     {
                         Text = $"{_categoryService.FindById(m.Id).Name} ",
                         Value = m.Id.ToString(),
-                    }),
+                    })
                 };
 
                 return View(updateBook);

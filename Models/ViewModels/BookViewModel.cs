@@ -38,6 +38,7 @@ namespace LibaryManagementSystem2.Models.ViewModels
         public int RackNumber {get; set;}
       
         public int CategoryId {get; set;}
+        public Category Category { get;set;}
 
         public int MaxIssueDays { get; set; }
     }

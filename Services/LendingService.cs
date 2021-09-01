@@ -1,8 +1,9 @@
 using System;
+using System.Collections.Generic;
 using LibaryManagementSystem2.Interfaces;
 using LibaryManagementSystem2.Models;
 
-namespace LibaryManagementSystem2
+namespace LibaryManagementSystem2.Services
 {
     public class LendingService : ILendingService
     {
@@ -26,8 +27,8 @@ namespace LibaryManagementSystem2
                 ExpireDate = lend.ExpireDate,
                 UserId = lend.UserId,
                 User = lend.User,
-                Book = lend.Book,
-                BookId = lend.BookId,
+                BookItem = lend.BookItem,
+                BookItemId = lend.BookItemId,
                 IsReturned = lend.IsReturned,
             };
 
@@ -37,6 +38,10 @@ namespace LibaryManagementSystem2
         public Lending FindById(int id)
         {
             return _lendingRepository.FindById(id);
+        }
+         public List<Lending> GetAll()
+        {
+            return _lendingRepository.GetAll();
         }
 
         public Lending Update(int lendingId, Lending lending)
@@ -48,8 +53,8 @@ namespace LibaryManagementSystem2
             }
 
             lends.IsReturned = lending.IsReturned;
-            lends.BookId = lending.BookId;
-            lends.Book = lending.Book;
+            lends.BookItemId = lending.BookItemId;
+            lends.BookItem = lending.BookItem;
             lends.User = lending.User;
             lends.ExpireDate = lending.ExpireDate;
              lends.IssueDate = lending.IssueDate;

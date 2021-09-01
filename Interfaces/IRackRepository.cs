@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using LibaryManagementSystem2.Models;
 
 namespace LibaryManagementSystem2.Interfaces
@@ -12,5 +13,6 @@ namespace LibaryManagementSystem2.Interfaces
         public Rack Update(Rack fine);
 
         public void Delete(int fineId);
+         public List<Rack> GetAll();  
     }
 }

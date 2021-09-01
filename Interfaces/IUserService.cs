@@ -7,13 +7,16 @@ namespace LibaryManagementSystem2.Interfaces
     {
         public void RegisterUser(User user);
       
-        public User LoginUser(User user);
+         public User LoginUser(User user);
+       
+        // public User LoginUser(string email, string password);
 
         public User FindById(int Id);
+       
         
 
-        public User Update(User user);
         public IEnumerable<User> GetAllUser();
+        public User Update(User user);
 
 
         public void Delete(int id);

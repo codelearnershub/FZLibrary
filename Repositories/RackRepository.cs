@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using LibaryManagementSystem2.Interfaces;
 using LibaryManagementSystem2.Models;
@@ -42,6 +43,10 @@ namespace LibaryManagementSystem2.Repositories
             _dbContext.Racks.Update(rack);
             _dbContext.SaveChanges();
             return rack;
+        }
+        public List<Rack> GetAll()
+        {
+            return _dbContext.Racks.ToList();
         }
     }
 }

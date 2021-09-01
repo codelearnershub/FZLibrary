@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using LibaryManagementSystem2.Interfaces;
 using LibaryManagementSystem2.Models;
@@ -42,6 +43,10 @@ namespace LibaryManagementSystem2.Repositories
             _dbContext.Lendings.Update(lending);
             _dbContext.SaveChanges();
             return lending;
+        }
+         public List<Lending> GetAll()
+        {
+            return _dbContext.Lendings.ToList();
         }
     }
 }

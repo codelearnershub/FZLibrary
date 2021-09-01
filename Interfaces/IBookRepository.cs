@@ -5,7 +5,7 @@ namespace LibaryManagementSystem2.Interfaces
 {
     public interface IBookRepository
     {
-        public List<Book> GetAll();
+      public List<Book> GetAll();  
 
         public Book GetBook(int id);
 

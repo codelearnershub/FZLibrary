@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 namespace LibaryManagementSystem2.Models
 {    public class Book 
     {
@@ -15,6 +18,7 @@ namespace LibaryManagementSystem2.Models
 
         public Category Category{ get; set;}
         public int BookItemId {get; set;}
+         public IEnumerable<SelectListItem> CategoryList { get; set; }
         
         public int MaxIssueDays { get; set; }
     }

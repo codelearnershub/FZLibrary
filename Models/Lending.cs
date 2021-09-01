@@ -12,11 +12,11 @@ namespace LibaryManagementSystem2.Models
 
         public User User { get; set; }
 
-        public int BookId { get; set; }
+        public int BookItemId { get; set; }
 
-        public Book Book { get; set; }
+        public Book BookItem { get; set; }
         
         public bool IsReturned {get; set;}
-        public decimal? FineAmount {get; set;}
+     
     }
 }

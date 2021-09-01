@@ -6,6 +6,7 @@ namespace LibaryManagementSystem2.Models
         public User user {get; set;}
         public int UserId {get; set;}
         public Role Role {get; set;}
+        public Role role {get; set;}
         public int RoleId {get; set;}
        
     }

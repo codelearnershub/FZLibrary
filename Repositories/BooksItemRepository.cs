@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LibaryManagementSystem2.Repositories
 {
-    public class BooksItemRepository: IBookItemRepository
+    public class BooksItemRepository : IBookItemRepository
     {
          private readonly LibaryManagementDBContext _dbContext;
 
@@ -33,6 +33,10 @@ namespace LibaryManagementSystem2.Repositories
                 _dbContext.BookItems.Remove(bookItem);
                 _dbContext.SaveChanges();
             }
+        }
+         public List<BookItem> GetAll()
+        {
+            return _dbContext.BookItems.ToList();
         }
 
         public BookItem FindById(int bookItemId)

@@ -23,7 +23,7 @@ namespace LibaryManagementSystem2.Services
               
                 CreatedAt = DateTime.Now,
                 BookId = bookItem.BookId,
-                Barcode = (Guid.NewGuid()).ToString("0000000000"),
+                Barcode = bookItem.Barcode,
                 NumberOfItem = bookItem.NumberOfItem,
                 
             };
@@ -56,13 +56,20 @@ namespace LibaryManagementSystem2.Services
             booksItem.CreatedAt = DateTime.Now;
 
             return _bookItemRepository.Update(bookItem);
-        }
+         }
+        //  public List<BookItem> GetAll()
+        // {
+        //     return _bookItemRepository.GetAll();
+        // }
+
 
         public void Delete(int id)
         {
             _bookItemRepository.Delete(id);
         }
-
-      
+        public List<BookItem> GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

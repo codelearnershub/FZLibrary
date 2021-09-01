@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using LibaryManagementSystem2.Models;
 
 namespace LibaryManagementSystem2.Interfaces
@@ -11,5 +12,6 @@ namespace LibaryManagementSystem2.Interfaces
         public Lending Update(int LendingId, Lending lending);
 
         public void Delete(int id);
+         public List<Lending> GetAll();  
     }
 }
