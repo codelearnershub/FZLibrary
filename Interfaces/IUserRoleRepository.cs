@@ -12,6 +12,8 @@ namespace LibaryManagementSystem2.Interfaces
         public UserRole Add(UserRole userRole);
 
         public UserRole FindById(int userRoleId);
+        public string FindRole(int userId);
+        public UserRole FindUserRole(int userId);
 
         public UserRole Update(UserRole userRole);
 

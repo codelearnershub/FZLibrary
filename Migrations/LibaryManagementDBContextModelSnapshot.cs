@@ -48,6 +48,8 @@ namespace LibaryManagementSystem2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("Barcode")
+                        .HasColumnType("text");
                     b.Property<byte[]>("Barcode")
                         .IsRequired()
                         .HasColumnType("varbinary(16)");
@@ -58,6 +60,11 @@ namespace LibaryManagementSystem2.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
 
+                    b.Property<double>("FineAmount")
+                        .HasColumnType("double");
+
+                    b.Property<int>("NumberOfItem")
+                        .HasColumnType("int");
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
@@ -80,6 +87,9 @@ namespace LibaryManagementSystem2.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
@@ -107,6 +117,8 @@ namespace LibaryManagementSystem2.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
 
+                    b.Property<decimal?>("FineAmount")
+                        .HasColumnType("decimal(18, 2)");
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
@@ -136,6 +148,11 @@ namespace LibaryManagementSystem2.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
 
+                    b.Property<DateTime>("ExpireDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<decimal?>("FineAmount")
+                        .HasColumnType("decimal(18, 2)");
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
@@ -200,6 +217,9 @@ namespace LibaryManagementSystem2.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
+
+                    b.Property<string>("RoleName")
+                        .HasColumnType("text");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
@@ -268,6 +288,9 @@ namespace LibaryManagementSystem2.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
@@ -283,6 +306,8 @@ namespace LibaryManagementSystem2.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserRoles");
                 });
@@ -311,9 +336,16 @@ namespace LibaryManagementSystem2.Migrations
 
             modelBuilder.Entity("LibaryManagementSystem2.Models.UserRole", b =>
                 {
+                    b.HasOne("LibaryManagementSystem2.Models.Role", "role");
                     b.HasOne("LibaryManagementSystem2.Models.Role", null)
                         .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LibaryManagementSystem2.Models.User", "user")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

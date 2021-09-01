@@ -4,6 +4,7 @@ using LibaryManagementSystem2.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace LibaryManagementSystem2.Repositories
 {
@@ -38,6 +39,20 @@ namespace LibaryManagementSystem2.Repositories
         {
             return _dbContext.UserRoles.FirstOrDefault(u => u.Id.Equals(userRoleId));
         }
+
+      
+        public string FindRole(int userId)
+        {
+            return  _dbContext.UserRoles.Include(r=> r.Role).FirstOrDefault(u => u.UserId == userId).Role.RoleName;
+           
+        }
+
+        public UserRole FindUserRole(int userId)
+        {
+            return _dbContext.UserRoles.Include(r => r.Role).FirstOrDefault(u => u.UserId == userId);
+
+        }
+
 
         public UserRole Update(UserRole userRole)
         {

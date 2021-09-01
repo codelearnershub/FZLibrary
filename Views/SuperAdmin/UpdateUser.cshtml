@@ -1,0 +1,89 @@
+﻿@model LibaryManagementSystem2.Models.ViewModels.UpdateUserViewModel
+
+@{ ViewBag.Title = "Edit User"; }
+@{
+    Layout = "_SuperAdminDashboard";
+}
+
+
+<div class="container">
+    <div class="">
+        <div class="">
+            <div class="">
+                <div class="">
+                    <br /><br /><h2 class="text-center font-weight-bolder" style="color:darkred"><i class="fas fa-edit"></i> Edit User( <span style="color:darkgoldenrod">@Model.LastName @Model.FirstName</span> ) Detail</h2><br /><br />
+                </div>
+                <form method="post">
+                    <input hidden asp-for="Id" />
+                    <div class="">
+                        <div class="form-row">
+                            <div class="form-group col-md-5">
+                                <label asp-for="LastName" class="form-check-label font-weight-bold"><span style="color: darkred">*</span> Last Name</label>
+                                <input style="margin-right: 20px" asp-for="LastName" class="form-control " placeholder="Last Name" />
+                                <span asp-validation-for="LastName" style="color:darkred"></span>
+                            </div>
+                            <div class="form-group col-md-2">
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label asp-for="FirstName" class="form-check-label font-weight-bold"><span style="color: darkred">*</span> First Name</label>
+                                <input style="margin-right: 20px" asp-for="FirstName" class="form-control" placeholder="Last Name" />
+                                <span asp-validation-for="FirstName" style="color:darkred"></span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-5">
+                                <label asp-for="PhoneNumber" class="form-check-label font-weight-bold"><span style="color: darkred">*</span> Phone number</label>
+                                <input asp-for="PhoneNumber" class="form-control" placeholder="Phone Number" />
+                                <span asp-validation-for="PhoneNumber" style="color:darkred"></span>
+                            </div>
+                            <div class="form-group col-md-2">
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label asp-for="Email" class="form-check-label font-weight-bold"><span style="color: darkred">*</span> Email</label>
+                                <input asp-for="Email" class="form-control" placeholder="Email" />
+                                <span asp-validation-for="Email" style="color:darkred"></span><br />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-5">
+                                <label class="form-check-label font-weight-bold" asp-for="Password"><span style="color: darkred">*</span> Password</label>
+                                <input type="password" asp-for="Password" class="form-control" placeholder="Create Password" />
+                                <span asp-validation-for="Password" style="color:darkred"></span>
+                            </div>
+                            <div class="form-group col-md-2">
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label class="form-check-label font-weight-bold" asp-for="ConfirmPassword"><span style="color: darkred">*</span> Confirm Password</label>
+                                <input type="password" asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password" />
+                                <span asp-validation-for="ConfirmPassword" style="color:darkred"></span><br />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="form-check-label font-weight-bold" asp-for="Address"><span style="color: darkred">*</span> Address</label>
+                                <textarea style="margin-right: 20px" asp-for="Address" class="form-control" placeholder="Address"></textarea>
+                                <span asp-validation-for="Address" style="color:darkred"></span><br>
+                            </div>
+                            <div class="form-group col-md-1">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="form-check-label font-weight-bold" asp-for="RoleId"><span style="color: darkred">*</span> Select Role</label>
+                                <select asp-for="RoleId" asp-items="@Model.RoleList" class="form-control">
+                                    <option disabled >--Select Role--</option>
+                                </select>
+                                <span asp-validation-for="RoleId" style="color:darkred"></span><br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="">
+                        <input type="submit" value="Edit" class="btn font-weight-bolder" style="background-color:darkgoldenrod" />
+                        <a style="margin-left: 5%; color: darkred" asp-action="ListUser">Back Home</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

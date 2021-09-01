@@ -33,6 +33,14 @@ namespace LibaryManagementSystem2.Repositories
                 _dbContext.SaveChanges();
             }
         }
+          public List<Role> GetAllRoles()
+        {
+            return _dbContext.Roles.ToList();
+        }
+         public Role FindByName(string roleName)
+        {
+            return _dbContext.Roles.FirstOrDefault(u => u.RoleName.Equals(roleName));
+        }
 
         public Role FindById(int roleId)
         {

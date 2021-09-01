@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using LibaryManagementSystem2.Interfaces;
 using LibaryManagementSystem2.Models;
@@ -6,19 +7,19 @@ using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace LibaryManagementSystem2.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        private readonly IUserRoleService _userRoleService;
+        private readonly IUserRoleRepository _userRoleRepository;
 
-        public UserService(IUserRepository userRepository, IUserRoleService userRoleService)
+        public UserService(IUserRepository userRepository, IUserRoleRepository userRoleRepository)
         {
             _userRepository = userRepository;
-            _userRoleService = userRoleService;
+            _userRoleRepository = userRoleRepository;
         }
 
 
-        public void RegisterUser(int userId, string password, string lastName, string firstName, string email, string phoneNumber, string address, int roleId)
+        public void RegisterUser(User user)
         {
             byte[] salt = new byte[128 / 8];
 
@@ -29,24 +30,30 @@ namespace LibaryManagementSystem2.Services
 
             string saltString = Convert.ToBase64String(salt);
 
-            string hashedPassword = HashPassword(password, saltString);
+            string hashedPassword = HashPassword(user.Password, saltString);
 
-            User user = new User
+            User users = new User
             {
-                CreatedBy = _userRepository.FindById(userId).Email,
+               
                 CreatedAt = DateTime.Now,
-                LastName = lastName,
-                FirstName = firstName,
-                Email = email,
-                PhoneNumber = phoneNumber,
-                Address = address,
+                LastName = user.LastName,
+                FirstName = user.FirstName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                Address = user.Address,
                 HashSalt = saltString,
                 PasswordHash = hashedPassword,
+                
             };
 
             _userRepository.Add(user);
-
-            _userRoleService.Add(user.Id, roleId);
+            UserRole userRole = new UserRole
+            {
+                CreatedAt = DateTime.Now,
+                UserId = user.Id,
+                RoleId = user.RoleId,
+            };
+            _userRoleRepository.Add(userRole);
         }
 
         private string HashPassword(string password, string salt)
@@ -63,17 +70,17 @@ namespace LibaryManagementSystem2.Services
             return hashed;
         }
 
-        public User LoginUser(string email, string password)
+        public User LoginUser(User user)
         {
-            User user = _userRepository.FindByEmail(email);
+            User users = _userRepository.FindByEmail(user.Email);
 
-            if (user == null)
+            if (users == null)
             {
 
                 return null;
             }
 
-            string hashedPassword = HashPassword(password, user.HashSalt);
+            string hashedPassword = HashPassword(user.Password, user.HashSalt);
 
             if (user.PasswordHash.Equals(hashedPassword))
             {
@@ -83,17 +90,21 @@ namespace LibaryManagementSystem2.Services
 
             return null;
         }
+          public IEnumerable<User> GetAllUser()
+        {
+            return _userRepository.GetAllUser();
+        }
 
         public User FindById(int Id)
         {
             return _userRepository.FindById(Id);
         }
 
-        public User Update(int id, string password, string lastName, string firstName, string email, string phoneNumber, string address)
+     public User Update(User user)
         {
-            User user = _userRepository.FindById(id);
+            User users = _userRepository.FindById(user.Id);
 
-            if (user == null)
+            if (users == null)
             {
                 return null;
             }
@@ -107,13 +118,13 @@ namespace LibaryManagementSystem2.Services
 
             string saltString = Convert.ToBase64String(salt);
 
-            string hashedPassword = HashPassword(password, saltString);
+            string hashedPassword = HashPassword(user.Password, saltString);
 
-            user.LastName = lastName;
-            user.FirstName = firstName;
-            user.Email = email;
-            user.PhoneNumber = phoneNumber;
-            user.Address = address;
+            user.LastName = user.LastName;
+            user.FirstName = user.FirstName;
+            user.Email = user.Email;
+            user.PhoneNumber = user.PhoneNumber;
+            user.Address = user.Address;
             user.HashSalt = saltString;
             user.PasswordHash = hashedPassword;
             user.UpdatedAt = DateTime.Now;
@@ -126,5 +137,9 @@ namespace LibaryManagementSystem2.Services
             _userRepository.Delete(id);
         }
 
+        public void RegisterUser(string email, User user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

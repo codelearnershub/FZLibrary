@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using System.Linq;
+using LibaryManagementSystem2.Interfaces;
 using LibaryManagementSystem2.Models;
 
 namespace LibaryManagementSystem2.Repositories
 {
-    public class FineRepository
+    public class FineRepository : IFineRepository
     {
           private readonly LibaryManagementDBContext _dbContext;
 
@@ -11,7 +13,10 @@ namespace LibaryManagementSystem2.Repositories
         {
             _dbContext = dbContext;
         }
-
+          public List<Fine> GetAll()
+        {
+            return _dbContext.Fines.ToList();
+        }
         public Fine Add(Fine fine)
         {
             _dbContext.Fines.Add(fine);

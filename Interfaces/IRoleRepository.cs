@@ -15,6 +15,9 @@ namespace LibaryManagementSystem2.Interfaces
         public Role FindById(int roleId);
 
         public Role Update(Role role);
+        public Role FindByName(string roleName);
+
+        public List<Role> GetAllRoles();
 
         public void Delete(int roleId);
     }

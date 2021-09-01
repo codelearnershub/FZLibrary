@@ -4,6 +4,7 @@ using LibaryManagementSystem2.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace LibaryManagementSystem2.Repositories
 {
@@ -22,6 +23,15 @@ namespace LibaryManagementSystem2.Repositories
             _dbContext.SaveChanges();
             return user;
         }
+         public bool Exists(int id)
+        {
+            return _dbContext.Users.Any(e => e.Id == id);
+        }
+         public Role FindRole(string name)
+        {
+            return  _dbContext.Roles.FirstOrDefault(r => r.RoleName.Equals(name));
+        }
+
 
         public void Delete(int userId)
         {
@@ -42,6 +52,15 @@ namespace LibaryManagementSystem2.Repositories
         public User FindByEmail(string userEmail)
         {
             return _dbContext.Users.FirstOrDefault(u => u.Email.Equals(userEmail));
+        }
+          public List<User> GetAllUser()
+        {
+            return _dbContext.Users.ToList();
+        }
+          public UserRole FindUserRole(int userId)
+        {
+            return _dbContext.UserRoles.Include(r => r.Role).FirstOrDefault(u => u.UserId == userId);
+
         }
 
         public User Update(User user)

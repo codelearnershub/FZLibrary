@@ -1,10 +1,11 @@
 using System;
+using System.Collections.Generic;
 using LibaryManagementSystem2.Interfaces;
 using LibaryManagementSystem2.Models;
 
 namespace LibaryManagementSystem2.Services
 {
-    public class RoleService
+    public class RoleService : IRoleService
     {
          private readonly IRoleRepository _roleRepository;
         private readonly IUserService _userService;
@@ -15,13 +16,13 @@ namespace LibaryManagementSystem2.Services
             _userService = userService;
         }
 
-        public Role Add(int userId, string name)
+        public Role Add(Role role)
         {
-            var role = new Role
+            var roles = new Role
             {
-                CreatedBy = _userService.FindById(userId).Email,
+               
                 CreatedAt = DateTime.Now,
-                RoleName = name,
+                RoleName = role.RoleName,
             };
 
             return _roleRepository.Add(role);
@@ -32,18 +33,22 @@ namespace LibaryManagementSystem2.Services
             return _roleRepository.FindById(id);
         }
 
-        public Role Update(int roleId, string name)
+        public Role Update(Role role)
         {
-            var role = _roleRepository.FindById(roleId);
+            var roles = _roleRepository.FindById(role.Id);
             if (role == null)
             {
                 return null;
             }
 
-            role.RoleName = name;
-            role.UpdatedAt = DateTime.Now;
+            role.RoleName = role.RoleName;
+          
 
             return _roleRepository.Update(role);
+        }
+          public IEnumerable<Role> GetAllRoles()
+        {
+            return _roleRepository.GetAllRoles();
         }
 
         public void Delete(int id)
@@ -51,5 +56,9 @@ namespace LibaryManagementSystem2.Services
             _roleRepository.Delete(id);
         }
 
+         public Role FindByName(string roleName)
+        {
+          return  _roleRepository.FindByName(roleName);
+        }
     }
 }

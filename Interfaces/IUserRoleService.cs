@@ -8,6 +8,9 @@ namespace LibaryManagementSystem2.Interfaces
 
         public UserRole FindById(int id);
 
+        public string FindRole(int userId);
+        public UserRole FindUserRole(int userId);
+
         public void Delete(int id);
     }
 }

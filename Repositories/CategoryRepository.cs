@@ -3,7 +3,7 @@ using System.Linq;
 using LibaryManagementSystem.Interfaces;
 using LibaryManagementSystem2.Models;
 
-namespace LibaryManagementSystem.Repositories
+namespace LibaryManagementSystem2.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
