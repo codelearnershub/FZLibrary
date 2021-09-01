@@ -30,6 +30,10 @@ namespace LibaryManagementSystem2.Services
 
             return _bookItemRepository.Add(bookItem);
         }
+        public List<BookItem> GetAll()
+        {
+            return _bookItemRepository.GetAll();
+        }
 
         public BookItem FindById(int id)
         {
@@ -63,7 +67,6 @@ namespace LibaryManagementSystem2.Services
         {
             _bookItemRepository.Delete(id);
         }
-
         public List<BookItem> GetAll()
         {
             throw new NotImplementedException();

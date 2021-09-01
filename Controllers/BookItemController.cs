@@ -12,6 +12,17 @@ namespace LibaryManagementSystem2.Controllers
 {
     public class BookItemController : Controller
     {
+        private readonly IBookItemService _bookItemService;
+        private readonly IUserService _userService;
+         private readonly IBookService _bookService;
+           public BookItemController(IBookItemService bookItemService,  IBookService bookService, IUserService userService)
+        {
+            _bookService = bookService;
+        
+            _bookItemService = bookItemService;
+            _userService = userService;
+        }
+          public IActionResult Index()
          private readonly IBookItemService _bookItemService;
         private readonly IUserService _userService;
         private readonly IBookService _bookService;
@@ -39,6 +50,10 @@ namespace LibaryManagementSystem2.Controllers
 
                     Id = bookItem.Id,
                     Barcode = bookItem.Barcode,
+                    BookId = bookItem.BookId,
+                    NumberOfItem = bookItem.NumberOfItem,
+                    FineAmount = bookItem.FineAmount,
+                    ItemsRemaining = bookItem.ItemsRemaining,
                     CreatedAt = bookItem.CreatedAt,
                     BookList = _bookService.GetAll().Select(m => new SelectListItem
                     {
@@ -69,6 +84,13 @@ namespace LibaryManagementSystem2.Controllers
         [HttpPost]
         public IActionResult AddBookItem(AddBookItemViewModel addBookItem)
         {
+            BookItem bookItem = new BookItem
+            {
+                BookId = addBookItem.BookId,
+                NumberOfItem = addBookItem.NumberOfItem,
+                Barcode = addBookItem.Barcode,
+                FineAmount = addBookItem.FineAmount,
+                ItemsRemaining = addBookItem.NumberOfItem,
             int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
             BookItem bookItem = new BookItem
@@ -100,10 +122,14 @@ namespace LibaryManagementSystem2.Controllers
                 UpdateBookItemViewModel updateBookItem = new UpdateBookItemViewModel
                 {
                     Id = bookItem.Id,
+                    NumberOfItem = bookItem.NumberOfItem,
+                    BookId = bookItem.BookId,
+                    Barcode = bookItem.Barcode,
+                    FineAmount = bookItem.FineAmount,
+                    Id = bookItem.Id,
                     Barcode = bookItem.Barcode,
                     NumberOfItem = bookItem.NumberOfItem,
                     CreatedAt = DateTime.Now,
-
                 };
 
                 return View(updateBookItem);
@@ -116,7 +142,12 @@ namespace LibaryManagementSystem2.Controllers
         {
             BookItem bookItem = new BookItem
             {
-             
+                Id = updateBookItem.Id,
+                Barcode = updateBookItem.Barcode,
+                NumberOfItem = updateBookItem.NumberOfItem,
+                BookId = updateBookItem.BookId,
+                FineAmount = updateBookItem.FineAmount,
+                ItemsRemaining = updateBookItem.NumberOfItem,
                 Id = updateBookItem.Id,
                 Barcode = updateBookItem.Barcode,
                 NumberOfItem = updateBookItem.NumberOfItem,
@@ -130,6 +161,8 @@ namespace LibaryManagementSystem2.Controllers
 
         public IActionResult Delete(int id)
         {
+            var bookItem = _bookItemService.FindById(id);
+            if (bookItem == null)
             var storeItem = _bookItemService.FindById(id);
             if (storeItem == null)
             {
@@ -138,6 +171,5 @@ namespace LibaryManagementSystem2.Controllers
             _bookItemService.Delete(id);
             return RedirectToAction("Index");
         }
-
     }
 }

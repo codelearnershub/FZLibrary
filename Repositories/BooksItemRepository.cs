@@ -43,6 +43,10 @@ namespace LibaryManagementSystem2.Repositories
         {
             return _dbContext.BookItems.FirstOrDefault(u => u.Id.Equals(bookItemId));
         }
+         public List<BookItem> GetAll()
+        {
+            return _dbContext.BookItems.ToList();
+        }
 
         public BookItem Update(BookItem bookItem)
         {

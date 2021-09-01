@@ -14,7 +14,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using LibaryManagementSystem2.Services;
-
 namespace LibaryManagementSystem2
 {
     public class Startup 
@@ -51,10 +50,25 @@ namespace LibaryManagementSystem2
             services.AddScoped<IBookItemService, BookItemService>();
             services.AddScoped<ILendingService, LendingService>();
             services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<ILendingRepository, LendingRepository>();
+            services.AddScoped<ILendingService, LendingService>();
+            services.AddScoped<IFineRepository, FineRepository>();
+            services.AddScoped<IFineService, FineService>();
+            services.AddScoped<IRackRepository, RackRepository>();
+            services.AddScoped<IBookItemService, BookItemService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+             services.AddScoped<IUserRoleRepository, UserRoleRepository>();
+              services.AddScoped<IUserRoleService, UserRoleService>();
+               
+
+        
+             
           
 
 
-            //   services.AddAutoMapper(typeof(Startup));
+          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
