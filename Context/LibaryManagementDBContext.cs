@@ -65,41 +65,13 @@ namespace LibaryManagementSystem2.Models
                     CreatedAt = DateTime.Now,
                 }
                 );
-            //      modelBuilder.Entity<Book>().Property(u => u.Item).IsRequired();
+                  modelBuilder.Entity<Book>().Property(u => u.Item).IsRequired();
 
 
-            // modelBuilder.Entity<Expenses>().Property(u => u.Description).IsRequired();
+            
 
-
-            // modelBuilder.Entity<Message>().Property(u => u.Title).IsRequired();
-
-            // modelBuilder.Entity<Message>().Property(u => u.Content).IsRequired();
 
            
-            // modelBuilder.Entity<FlockType>().Property(u => u.Name).IsRequired();
-
-            // modelBuilder.Entity<FlockType>().Property(u => u.Description).IsRequired();
-
-
-            // modelBuilder.Entity<Flock>().Property(u => u.BatchNo).IsRequired();
-
-            // modelBuilder.Entity<Flock>().HasIndex(u => u.BatchNo).IsUnique();
-
-
-
-
-            // modelBuilder.Entity<Sales>().Property(u => u.Item).IsRequired();
-
-
-            // modelBuilder.Entity<SalesItem>().Property(u => u.Item).IsRequired();
-
-
-
-            // modelBuilder.Entity<BookItem>().Property(u => u.Name).IsRequired();
-
-            // modelBuilder.Entity<StoreItem>().Property(u => u.ItemType).IsRequired();
-
-            // modelBuilder.Entity<UserRole>().HasIndex(u => new { u.UserId, u.RoleId }).IsUnique();
 
             modelBuilder.Entity<UserRole>().HasData(
                 new UserRole
